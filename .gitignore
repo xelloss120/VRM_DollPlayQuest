@@ -67,3 +67,7 @@ Assets/XR/
 Assets/XR.meta
 ProjectSettings/XRPackageSettings.asset
 ProjectSettings/XRPackageSettings.meta
+Assets/Plugins/
+Assets/Plugins.meta
+Assets/_TerrainAutoUpgrade/
+Assets/_TerrainAutoUpgrade.meta
