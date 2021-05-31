@@ -71,3 +71,7 @@ Assets/Plugins/
 Assets/Plugins.meta
 Assets/_TerrainAutoUpgrade/
 Assets/_TerrainAutoUpgrade.meta
+
+# etc.
+Model/
+Model.meta
