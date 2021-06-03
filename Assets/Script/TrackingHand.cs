@@ -122,14 +122,24 @@ public class TrackingHand : MonoBehaviour
                     if (Child != null)
                     {
                         var ctrl = Child.GetComponent<Ctrl>();
-                        if (ctrl.Parent.root.GetComponent<CtrlLight>() == null &&
-                            ctrl.Parent.root.GetComponent<CtrlBGColor>() == null)
+                        if (ctrl.Parent != null)
                         {
-                            if (ctrl.Parent != null)
+                            if (ctrl.Parent.root.GetComponent<CtrlLight>() == null &&
+                                ctrl.Parent.root.GetComponent<CtrlBGColor>() == null)
                             {
+                                // 子オブジェクトであった場合は親のrootと一緒に削除
                                 Destroy(ctrl.Parent.root.gameObject);
+                                Destroy(ctrl.gameObject);
                             }
-                            Destroy(ctrl.gameObject);
+                        }
+                        else
+                        {
+                            if (Child.GetComponent<CtrlLight>() == null &&
+                                Child.GetComponent<CtrlBGColor>() == null)
+                            {
+                                // rootオブジェクトで光源でも背景色でもなければ削除
+                                Destroy(ctrl.gameObject);
+                            }
                         }
                     }
                     break;
