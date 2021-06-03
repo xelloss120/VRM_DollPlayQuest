@@ -168,6 +168,12 @@ public class LoadModel : MonoBehaviour
 
     void SetCtrlFK(Animator anim, HumanBodyBones bone)
     {
+        if (anim.GetBoneTransform(bone) == null)
+        {
+            // 必須ではない部位の場合は割り当て設定されていない可能性があるため回避
+            return;
+        }
+
         var ctrl = Instantiate(CtrlPrefab);
         ctrl.GetComponent<Ctrl>().SetColor(Color.cyan);
         ctrl.AddComponent<CtrlFK>();
@@ -176,6 +182,12 @@ public class LoadModel : MonoBehaviour
 
     void SetCtrlIK(Animator anim, HumanBodyBones bone, VRIK vrik, Transform root)
     {
+        if (anim.GetBoneTransform(bone) == null)
+        {
+            // 必須ではない部位の場合は割り当て設定されていない可能性があるため回避
+            return;
+        }
+
         var ctrl = Instantiate(CtrlPrefab);
         ctrl.GetComponent<Ctrl>().SetColor(Color.cyan);
         ctrl.transform.parent = root;

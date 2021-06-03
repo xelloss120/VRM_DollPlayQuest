@@ -18,7 +18,8 @@ public class TrackingHand : MonoBehaviour
 
     Transform Child = null;
     Transform Parent = null;
-    bool CtrlMeshEnabled = true;
+
+    static bool CtrlMeshEnabled = true;
 
 #if UNITY_EDITOR
     string ModelDataPath = "Model";
@@ -53,7 +54,7 @@ public class TrackingHand : MonoBehaviour
         // 掴む
         if (OVRHand.IsTracked &&
             OVRHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) > 0.1f &&
-            Child == null && other.GetComponent<Ctrl>() != null)
+            Child == null && other.GetComponent<Ctrl>() != null && CtrlMeshEnabled)
         {
             Parent = other.transform.parent;
             Child = other.transform;
@@ -121,11 +122,15 @@ public class TrackingHand : MonoBehaviour
                     if (Child != null)
                     {
                         var ctrl = Child.GetComponent<Ctrl>();
-                        if (ctrl.Parent != null)
+                        if (ctrl.Parent.root.GetComponent<CtrlLight>() == null &&
+                            ctrl.Parent.root.GetComponent<CtrlBGColor>() == null)
                         {
-                            Destroy(ctrl.Parent.root.gameObject);
+                            if (ctrl.Parent != null)
+                            {
+                                Destroy(ctrl.Parent.root.gameObject);
+                            }
+                            Destroy(ctrl.gameObject);
                         }
-                        Destroy(ctrl.gameObject);
                     }
                     break;
                 case CtrlModel.Touch.Hide:
