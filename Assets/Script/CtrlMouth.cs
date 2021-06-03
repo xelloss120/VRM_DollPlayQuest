@@ -5,6 +5,8 @@ public class CtrlMouth : MonoBehaviour
 {
     public VRMBlendShapeProxy Proxy;
 
+    [SerializeField] float Adjust = 3;
+
     Vector3 Offset = new Vector3(0, -0.2f, 0.2f);
     Transform Parent;
 
@@ -20,7 +22,7 @@ public class CtrlMouth : MonoBehaviour
 
     void Update()
     {
-        var pos = (Parent.InverseTransformPoint(transform.position) - Offset) * 3;
+        var pos = (Parent.InverseTransformPoint(transform.position) - Offset) * Adjust;
         Proxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.A), Mathf.Min(1, Mathf.Max(0, pos.y)));
         Proxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.I), Mathf.Min(1, -Mathf.Min(0, pos.y)));
         Proxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.U), Mathf.Min(1, Mathf.Max(0, pos.x)));

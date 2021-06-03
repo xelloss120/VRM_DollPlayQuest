@@ -12,6 +12,8 @@ public class CtrlHand : MonoBehaviour
     }
     public LR LeftRight;
 
+    [SerializeField] float Adjust = 5;
+
     List<Transform> Thumb = new List<Transform>();
     List<Transform> Finger = new List<Transform>();
 
@@ -77,7 +79,7 @@ public class CtrlHand : MonoBehaviour
 
     void Update()
     {
-        var pos = Parent.InverseTransformPoint(transform.position) * 5;
+        var pos = Parent.InverseTransformPoint(transform.position) * Adjust;
         if (pos.y < 0)
         {
             // ぐー
