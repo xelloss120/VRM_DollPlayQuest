@@ -125,6 +125,43 @@ public class LoadModel : MonoBehaviour
                 SetCtrlIK(anim, HumanBodyBones.RightLowerLeg, vrik, root.transform);
             }
 
+            // 表情
+            var shape = Instantiate(CtrlPrefab);
+            shape.GetComponent<Ctrl>().SetColor(Color.yellow);
+            shape.AddComponent<CtrlShape>();
+            shape.GetComponent<CtrlShape>().Proxy = context.Root.GetComponent<VRMBlendShapeProxy>();
+            shape.transform.parent = anim.GetBoneTransform(HumanBodyBones.Head);
+
+            // 口
+            var mouth = Instantiate(CtrlPrefab);
+            mouth.GetComponent<Ctrl>().SetColor(Color.yellow);
+            mouth.AddComponent<CtrlMouth>();
+            mouth.GetComponent<CtrlMouth>().Proxy = context.Root.GetComponent<VRMBlendShapeProxy>();
+            mouth.transform.parent = anim.GetBoneTransform(HumanBodyBones.Head);
+
+            // 視線
+            var eye = Instantiate(CtrlPrefab);
+            eye.GetComponent<Ctrl>().SetColor(Color.yellow);
+            eye.AddComponent<CtrlEye>();
+            eye.GetComponent<CtrlEye>().LookAt = context.Root.GetComponent<VRMLookAtHead>();
+            eye.transform.parent = anim.GetBoneTransform(HumanBodyBones.Head);
+
+            // 左手
+            var handL = Instantiate(CtrlPrefab);
+            handL.GetComponent<Ctrl>().SetColor(Color.magenta);
+            handL.AddComponent<CtrlHand>();
+            handL.GetComponent<CtrlHand>().Anim = anim;
+            handL.GetComponent<CtrlHand>().LeftRight = CtrlHand.LR.L;
+            handL.transform.parent = anim.GetBoneTransform(HumanBodyBones.LeftHand);
+
+            // 右手
+            var handR = Instantiate(CtrlPrefab);
+            handR.GetComponent<Ctrl>().SetColor(Color.magenta);
+            handR.AddComponent<CtrlHand>();
+            handR.GetComponent<CtrlHand>().Anim = anim;
+            handR.GetComponent<CtrlHand>().LeftRight = CtrlHand.LR.R;
+            handR.transform.parent = anim.GetBoneTransform(HumanBodyBones.RightHand);
+
             DestroyFileNameBar.DestroyBars();
         }
     }
@@ -141,8 +178,6 @@ public class LoadModel : MonoBehaviour
     {
         var ctrl = Instantiate(CtrlPrefab);
         ctrl.GetComponent<Ctrl>().SetColor(Color.cyan);
-        ctrl.transform.position = anim.GetBoneTransform(bone).position;
-        ctrl.transform.rotation = root.rotation;
         ctrl.transform.parent = root;
 
         var ctrlIK = ctrl.AddComponent<CtrlIK>();

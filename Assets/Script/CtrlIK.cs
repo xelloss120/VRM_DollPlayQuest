@@ -13,6 +13,11 @@ public class CtrlIK : MonoBehaviour
     {
         Parent = transform.parent;
 
+        // 初期位置設定
+        transform.position = Target.position;
+        transform.rotation = Parent.rotation;
+
+        // VRIKのTargetを設定
         switch (Bone)
         {
             case HumanBodyBones.Head:
