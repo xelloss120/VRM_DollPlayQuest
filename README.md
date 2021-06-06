@@ -28,3 +28,6 @@ https://twitter.com/120byte
 ## 使用しているアセット一覧
 OculusIntegarion  
 FinalIK
+
+## 参考
+https://framesynthesis.jp/tech/unity/oculusquest/
