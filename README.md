@@ -26,5 +26,5 @@ https://twitter.com/120byte
 使用しているアセットを除外しているため、cloneしただけではビルドできません。
 
 ## 使用しているアセット一覧
-OculusIntegarion
+OculusIntegarion  
 FinalIK
