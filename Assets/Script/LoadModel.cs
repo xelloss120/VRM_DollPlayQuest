@@ -77,6 +77,12 @@ public class LoadModel : MonoBehaviour
             var springBonesColliders = TrackingSpace.GetComponentsInChildren<VRMSpringBoneColliderGroup>();
             foreach (var springBone in springBones)
             {
+                if(springBone.ColliderGroups == null)
+                {
+                    // 揺れ物にコライダー設定がない場合もあるので回避
+                    continue;
+                }
+
                 var list = new List<VRMSpringBoneColliderGroup>(springBone.ColliderGroups);
                 foreach (var springBonesCollider in springBonesColliders)
                 {
