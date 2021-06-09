@@ -71,8 +71,10 @@ Assets/Plugins/
 Assets/Plugins.meta
 Assets/_TerrainAutoUpgrade/
 Assets/_TerrainAutoUpgrade.meta
+backup/
 
 # etc.
 Model/
 Model.meta
 *.zip
+user.keystore
