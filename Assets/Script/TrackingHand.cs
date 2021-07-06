@@ -54,7 +54,8 @@ public class TrackingHand : MonoBehaviour
         // 掴む
         if (OVRHand.IsTracked &&
             OVRHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) > 0.1f &&
-            Child == null && other.GetComponent<Ctrl>() != null && CtrlMeshEnabled)
+            Child == null && other.GetComponent<Ctrl>() != null && CtrlMeshEnabled &&
+            other.transform.parent.GetComponent<OVRHand>() == null)
         {
             Parent = other.transform.parent;
             Child = other.transform;
@@ -92,10 +93,16 @@ public class TrackingHand : MonoBehaviour
                     TrackingSpace.Rotate(RotateSpeed);
                     break;
                 case CtrlPlayer.Touch.ScaleU:
-                    TrackingSpace.localScale -= Vector3.one * ScalingSpeed;
+                    if (TrackingSpace.localScale.y > 0.1)
+                    {
+                        TrackingSpace.localScale -= Vector3.one * ScalingSpeed;
+                    }
                     break;
                 case CtrlPlayer.Touch.ScaleD:
-                    TrackingSpace.localScale += Vector3.one * ScalingSpeed;
+                    if (TrackingSpace.localScale.y < 10)
+                    {
+                        TrackingSpace.localScale += Vector3.one * ScalingSpeed;
+                    }
                     break;
             }
         }
