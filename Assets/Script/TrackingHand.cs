@@ -55,7 +55,7 @@ public class TrackingHand : MonoBehaviour
         if (OVRHand.IsTracked &&
             OVRHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) > 0.1f &&
             Child == null && other.GetComponent<Ctrl>() != null && CtrlMeshEnabled &&
-            other.transform.parent.GetComponent<OVRHand>() == null)
+            (other.transform.parent == null || other.transform.parent.GetComponent<OVRHand>() == null))
         {
             Parent = other.transform.parent;
             Child = other.transform;
